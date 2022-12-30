@@ -14,6 +14,8 @@ class City {
     string country;
 
 public:
+    City();
     City(string cidade, string pais);
+    string getCity();
 };
 #endif //UNTITLED1_CITY_H

@@ -18,8 +18,11 @@ class Airport {
     Position position;
 
 public:
+    Airport();
     Airport(string codigo, string nome, City cidade, Position pos);
-
+    Position getPosition();
+    string getCityName();
+    string getCode();
 };
 
 

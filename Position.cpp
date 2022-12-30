@@ -6,6 +6,8 @@
 
 using namespace std;
 
+Position::Position(): lat(0), lon(0) {}
+
 Position::Position(double px, double py): lat(px), lon(py) {}
 
 double Position::getLat() {return lat;}

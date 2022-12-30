@@ -24,5 +24,6 @@ public:
     void readAirlines();
     Graph readFlights();
     double Haversine(Position p1, Position p2);
+    int findAirportByPos(Position pos);
 };
 #endif //UNTITLED1_GESTOR_H

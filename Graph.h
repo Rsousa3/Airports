@@ -8,6 +8,7 @@
 #include <string>
 #include <list>
 #include <vector>
+#include "Position.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ class Graph {
 
 public:
     Graph(int nodes, bool dir = false);
-
+    //vector<Node> getNodes() {return nodes;}
     void addEdge(int src, int des, string weight = "");
 };
 #endif //UNTITLED1_GRAPH_H

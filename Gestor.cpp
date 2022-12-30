@@ -28,7 +28,6 @@ void Gestor::readAirports() {
             actLine.push_back(word);
         }
 
-
         airCode = actLine[0];
         airName = actLine[1];
         city = actLine[2];
@@ -79,7 +78,7 @@ void Gestor::readAirlines() {
 }
 
 Graph Gestor::readFlights() {
-    Graph graph(63832, true);
+    Graph graph(3019, true);
 
     vector<string> actLine(3);
     ifstream in("/home/ricardo/CLionProjects/untitled1/data/flights.csv");
@@ -120,4 +119,20 @@ double Gestor::Haversine(Position p1, Position p2) {
     double rad = 6371;
     double c = 2 * asin(sqrt(a));
     return rad * c;
+}
+
+int Gestor::findAirportByPos(Position pos) {
+    float minDist = MAXFLOAT;
+    float curDist;
+    string curAirp;
+    for (int i = 1; i < 3020; i++) {
+        Airport a = airports[i];
+        Position p = a.getPosition();
+        curDist = Haversine(pos, p);
+        if (curDist < minDist) {
+            minDist = curDist;
+            curAirp = a.getCode();
+        }
+    }
+    return codes[curAirp];
 }

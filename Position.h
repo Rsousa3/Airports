@@ -12,6 +12,7 @@ class Position {
     double lon;
 
 public:
+    Position();
     Position(double px, double py);
     double getLat();
     double getLon();
