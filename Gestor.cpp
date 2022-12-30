@@ -121,18 +121,29 @@ double Gestor::Haversine(Position p1, Position p2) {
     return rad * c;
 }
 
-int Gestor::findAirportByPos(Position pos) {
-    float minDist = MAXFLOAT;
+vector<int> Gestor::findAirportsByPos(Position pos, double x) {
+    vector<int> values;
     float curDist;
     string curAirp;
     for (int i = 1; i < 3020; i++) {
         Airport a = airports[i];
         Position p = a.getPosition();
         curDist = Haversine(pos, p);
-        if (curDist < minDist) {
-            minDist = curDist;
+        if (curDist < x) {
             curAirp = a.getCode();
+            values.push_back(codes[curAirp]);
         }
     }
-    return codes[curAirp];
+    return values;
+}
+
+vector<int> Gestor::findAirportsByCity(string code) {
+    vector<int> values;
+    for (int i = 1; i < 3020; i++) {
+        Airport a = airports[i];
+        if (a.getCityName() == code) {
+            values.push_back(codes[a.getCode()]);
+        }
+    }
+    return values;
 }
