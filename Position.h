@@ -8,10 +8,12 @@
 using namespace std;
 
 class Position {
-    float x;
-    float y;
+    double lat;
+    double lon;
 
 public:
-    Position(float px, float py);
+    Position(double px, double py);
+    double getLat();
+    double getLon();
 };
 #endif //UNTITLED1_POSITION_H

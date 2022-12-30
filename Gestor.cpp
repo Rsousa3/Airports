@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <cmath>
 #include "Gestor.h"
 #include "Airport.h"
 #include "Graph.h"
@@ -16,7 +17,7 @@ void Gestor::readAirports() {
     ifstream in("/home/ricardo/CLionProjects/untitled1/data/airports.csv");
     string line, word;
     string airCode, airName, city, country;
-    float lat, lon;
+    double lat, lon;
 
     getline(in, line);
     int count = 1;
@@ -45,6 +46,7 @@ void Gestor::readAirports() {
 
         codes.insert({airCode, count});
         code_airp.insert({airCode, a});
+        airports.insert({count, a});
         count++;
     }
 }
@@ -102,4 +104,20 @@ Graph Gestor::readFlights() {
         graph.addEdge(nsrc, ntarg, airline);
     }
     return graph;
+}
+
+double Gestor::Haversine(Position p1, Position p2) {
+    //distâncias
+    double dLat = (p2.getLat() - p1.getLat()) * M_PI / 180.0;
+    double dLon = (p2.getLon() - p1.getLon()) * M_PI / 180.0;
+
+    // converter lat e lon para radianos
+    double lat1 = p1.getLat() * M_PI / 180.0;
+    double lat2 = p2.getLat() * M_PI / 180.0;
+
+    // aplicar fórmula
+    double a = pow(sin(dLat / 2), 2) + pow(sin(dLon / 2), 2) * cos(lat1) * cos(lat2);
+    double rad = 6371;
+    double c = 2 * asin(sqrt(a));
+    return rad * c;
 }
