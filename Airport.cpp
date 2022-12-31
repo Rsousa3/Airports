@@ -16,3 +16,5 @@ Position Airport::getPosition() {return position;}
 string Airport::getCityName() {return city.getCity();}
 
 string Airport::getCode() {return code;}
+
+string Airport::getName() {return name;}

@@ -6,11 +6,16 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <iostream>
+#include <set>
 #include "Gestor.h"
 #include "Airport.h"
 #include "Graph.h"
 
 using namespace std;
+
+
+Gestor::Gestor(): graph(3019, true) {}
 
 void Gestor::readAirports() {
     vector<string> actLine(6);
@@ -77,8 +82,8 @@ void Gestor::readAirlines() {
     }
 }
 
-Graph Gestor::readFlights() {
-    Graph graph(3019, true);
+void Gestor::readFlights() {
+    //Graph graph(3019, true);
 
     vector<string> actLine(3);
     ifstream in("/home/ricardo/CLionProjects/untitled1/data/flights.csv");
@@ -102,7 +107,7 @@ Graph Gestor::readFlights() {
         ntarg = codes[targ];
         graph.addEdge(nsrc, ntarg, airline);
     }
-    return graph;
+    //return graph;
 }
 
 double Gestor::Haversine(Position p1, Position p2) {
@@ -146,4 +151,16 @@ vector<int> Gestor::findAirportsByCity(string code) {
         }
     }
     return values;
+}
+
+void Gestor::getAirportInfo(string aCode) {
+    int n = codes[aCode];
+    set<int> dests;
+    dests = graph.getDestInfo(n);
+    Airport src = airports[n];
+    cout << "Existe(m) " << dests.size() << " voo(s) para destinos diferentes a partir do aeroporto " << src.getName() << ":\n";
+    for (int dest : dests) {
+        Airport a = airports[dest];
+        cout << "Aeroporto " << a.getName() << ", " << a.getCityName() << "\n";
+    }
 }

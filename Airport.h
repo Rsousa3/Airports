@@ -23,6 +23,7 @@ public:
     Position getPosition();
     string getCityName();
     string getCode();
+    string getName();
 };
 
 

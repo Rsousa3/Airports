@@ -7,7 +7,7 @@ int main() {
     Gestor g;
     g.readAirports();
     g.readAirlines();
-    Graph graph = g.readFlights();
+    g.readFlights();
     std::cout << "Hello, World!" << std::endl;
 
 
@@ -21,7 +21,9 @@ int main() {
     cout << "\n";
 
 //--------------MENU--------------------------------------
-    cout << "Descobrir a melhor maneira de voar de um local para o outro (menor nº de voos)";
-
+    //cout << "Descobrir a melhor maneira de voar de um local para o outro (menor nº de voos)";
+    cout << "Descobrir os voos do aeroporto VDB:\n";
+    string a = "JFK";
+    g.getAirportInfo(a);
     return 0;
 }

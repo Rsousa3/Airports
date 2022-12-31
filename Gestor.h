@@ -18,13 +18,16 @@ class Gestor {
     unordered_map<int, Airport> airports;
     unordered_map<string, Airport> code_airp; //talvez não seja necessário
     unordered_map<string, Airline> code_airline;
+    Graph graph;
 
 public:
+    Gestor();
     void readAirports();
     void readAirlines();
-    Graph readFlights();
+    void readFlights();
     double Haversine(Position p1, Position p2);
     vector<int> findAirportsByPos(Position pos, double x);
     vector<int> findAirportsByCity(string code);
+    void getAirportInfo(string aCode);
 };
 #endif //UNTITLED1_GESTOR_H
