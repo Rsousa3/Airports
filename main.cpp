@@ -22,8 +22,14 @@ int main() {
 
 //--------------MENU--------------------------------------
     //cout << "Descobrir a melhor maneira de voar de um local para o outro (menor nº de voos)";
-    cout << "Descobrir os voos do aeroporto VDB:\n";
+    //cout << "Descobrir os voos do aeroporto VDB:\n";
     string a = "JFK";
-    g.getAirportInfo(a);
+    //g.getAirportInfo(a);
+
+    //cout << "Descobrir as airlines com voos num aeroporto \n";
+    //g.getFlightAirlines(a);
+
+    cout << "Descobrir locais para os quais um aeroporto possui um voo:\n";
+    g.getAirportByLocal(a);
     return 0;
 }

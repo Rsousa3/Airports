@@ -16,6 +16,8 @@ class Airline {
     string country;
 
 public:
+    Airline();
     Airline(string cod, string nome, string sign, string pais);
+    string getName();
 };
 #endif //UNTITLED1_AIRLINE_H

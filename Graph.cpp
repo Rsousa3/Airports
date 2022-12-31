@@ -15,11 +15,31 @@ void Graph::addEdge(int src, int des, string weight) {
     if (!hasDir) nodes[des].adj.push_back({src, weight});
 }
 
-set<int> Graph::getDestInfo(int n) {
-    set<int> res;
+vector<int> Graph::getDestInfo(int n, bool allDest) {
+    vector<int> res;
     auto node = nodes[n];
-    for (auto i : node.adj) {
-        res.insert(i.dest);
+    if (!allDest) {
+        set<int> temp;
+        for (auto i: node.adj) {
+            temp.insert(i.dest);
+        }
+        for (auto t : temp) {
+            res.push_back(t);
+        }
+    }
+    if (allDest) {
+        for (auto i: node.adj) {
+            res.push_back(i.dest);
+        }
+    }
+    return res;
+}
+
+set<string> Graph::getAirlines(int n) {
+    set<string> res;
+    auto node = nodes[n];
+    for (auto dest : node.adj) {
+        res.insert(dest.weight);
     }
     return res;
 }

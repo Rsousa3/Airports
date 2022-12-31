@@ -153,14 +153,45 @@ vector<int> Gestor::findAirportsByCity(string code) {
     return values;
 }
 
-void Gestor::getAirportInfo(string aCode) {
+void Gestor::getAirportInfo(string aCode, bool allD) {
     int n = codes[aCode];
-    set<int> dests;
-    dests = graph.getDestInfo(n);
+    vector<int> dests;
+    dests = graph.getDestInfo(n, allD);
     Airport src = airports[n];
-    cout << "Existe(m) " << dests.size() << " voo(s) para destinos diferentes a partir do aeroporto " << src.getName() << ":\n";
+    if (!allD) {
+        cout << "Existe(m) " << dests.size() << " voo(s) para destinos diferentes a partir do aeroporto " << src.getName() << ":\n";
+    }
+    else {
+        cout << "Existe(m) " << dests.size() << " voo(s) a partir do aeroporto " << src.getName() << " :\n";
+    }
     for (int dest : dests) {
         Airport a = airports[dest];
         cout << "Aeroporto " << a.getName() << ", " << a.getCityName() << "\n";
+    }
+}
+
+void Gestor::getFlightAirlines(string aCode) {
+    int n = codes[aCode];
+    set<string> airlines = graph.getAirlines(n);
+    Airport src = airports[n];
+    cout << "Existe(m) " << airlines.size() << " companhia(s) aérea(s) diferente(s) com voos em " << src.getName() << ":\n";
+    for (string line : airlines) {
+        Airline aLine = code_airline[line];
+        cout << aLine.getName() << "\n";
+    }
+}
+
+void Gestor::getAirportByLocal(string aCode) {
+    int n = codes[aCode];
+    vector<int> airps = graph.getDestInfo(n);
+    Airport src = airports[n];
+    set<City> locais;
+    for (auto a : airps) {
+        Airport cur = airports[a];
+        locais.insert(cur.getCity());
+    }
+    cout << "O aeroporto " << src.getName() << " possui voos para " << locais.size() << " locais diferentes:\n";
+    for (auto p : locais) {
+        cout << p.getCity() << " - " << p.getCountry() << "\n";
     }
 }

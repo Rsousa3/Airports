@@ -13,6 +13,8 @@ Airport::Airport(string codigo, string nome, City cidade, Position pos): code(co
 
 Position Airport::getPosition() {return position;}
 
+City Airport::getCity() {return city;}
+
 string Airport::getCityName() {return city.getCity();}
 
 string Airport::getCode() {return code;}

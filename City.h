@@ -17,5 +17,7 @@ public:
     City();
     City(string cidade, string pais);
     string getCity();
+    string getCountry();
+    bool operator<(const City &c2) const;
 };
 #endif //UNTITLED1_CITY_H

@@ -21,6 +21,7 @@ public:
     Airport();
     Airport(string codigo, string nome, City cidade, Position pos);
     Position getPosition();
+    City getCity();
     string getCityName();
     string getCode();
     string getName();

@@ -28,6 +28,8 @@ public:
     double Haversine(Position p1, Position p2);
     vector<int> findAirportsByPos(Position pos, double x);
     vector<int> findAirportsByCity(string code);
-    void getAirportInfo(string aCode);
+    void getAirportInfo(string aCode, bool allD = false);
+    void getFlightAirlines(string aCode);
+    void getAirportByLocal(string aCode);
 };
 #endif //UNTITLED1_GESTOR_H
