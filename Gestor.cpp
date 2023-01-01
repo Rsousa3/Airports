@@ -8,6 +8,7 @@
 #include <cmath>
 #include <iostream>
 #include <set>
+#include <stack>
 #include "Gestor.h"
 #include "Airport.h"
 #include "Graph.h"
@@ -194,4 +195,19 @@ void Gestor::getAirportByLocal(string aCode) {
     for (auto p : locais) {
         cout << p.getCity() << " - " << p.getCountry() << "\n";
     }
+}
+
+void Gestor::getShortPath(string src, string des, bool filterLine) {
+    int s = codes[src];
+    int d = codes[des];
+    stack<int> path = graph.getShortestPath(s, d);
+    int cur;
+    while (path.top() != d) {
+        cur = path.top();
+        Airport curPort = airports[cur];
+        cout << curPort.getCode() << " - ";
+        path.pop();
+    }
+    Airport last = airports[d];
+    cout << last.getCode() << "\n";
 }

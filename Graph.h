@@ -9,6 +9,7 @@
 #include <list>
 #include <vector>
 #include <set>
+#include <stack>
 #include "Position.h"
 
 using namespace std;
@@ -35,5 +36,6 @@ public:
     vector<int> getDestInfo(int n, bool allDest = false);
     //set<string> getCountries(int n);
     set<string> getAirlines(int n);
+    stack<int> getShortestPath(int src, int dest);
 };
 #endif //UNTITLED1_GRAPH_H

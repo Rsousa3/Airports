@@ -31,5 +31,6 @@ public:
     void getAirportInfo(string aCode, bool allD = false);
     void getFlightAirlines(string aCode);
     void getAirportByLocal(string aCode);
+    void getShortPath(string src, string des, bool filterLine = false);
 };
 #endif //UNTITLED1_GESTOR_H

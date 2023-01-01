@@ -3,6 +3,8 @@
 //
 
 #include <set>
+#include <queue>
+#include <stack>
 #include "Graph.h"
 
 using namespace std;
@@ -40,6 +42,40 @@ set<string> Graph::getAirlines(int n) {
     auto node = nodes[n];
     for (auto dest : node.adj) {
         res.insert(dest.weight);
+    }
+    return res;
+}
+
+stack<int> Graph::getShortestPath(int src, int dest) {
+    stack<int> res;
+    vector<int> prevs(3020, 0);
+    prevs[src] = -1;
+    vector<int> dist(3020, 0);
+    queue<int> unvisited;
+    for (int v = 1; v < 3020; v++) {nodes[v].visited = false;}
+    unvisited.push(src);
+    nodes[src].visited = true;
+    while (!unvisited.empty() || nodes[dest].visited == false) { //para quando o dest é encontrado ou, se não for, quando não houver mais destinos)
+        int u = unvisited.front(); unvisited.pop();
+        for (auto e : nodes[u].adj) {
+            int des = e.dest;
+            if (!nodes[des].visited) {
+                prevs[des] = u;
+                dist[des] = dist[u] + 1;
+                unvisited.push(des);
+                nodes[des].visited = true;
+            }
+        }
+    }
+    int pathL = dist[dest]; //distancia entre src e dest
+    if (pathL == 0) {return res;}
+    int temp = dest;
+    res.push(dest);
+    while (pathL != 0) {
+        int prevNode = prevs[temp];
+        res.push(prevNode);
+        temp = prevNode;
+        pathL--;
     }
     return res;
 }

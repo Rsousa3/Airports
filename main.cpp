@@ -29,7 +29,12 @@ int main() {
     //cout << "Descobrir as airlines com voos num aeroporto \n";
     //g.getFlightAirlines(a);
 
-    cout << "Descobrir locais para os quais um aeroporto possui um voo:\n";
-    g.getAirportByLocal(a);
+    //cout << "Descobrir locais para os quais um aeroporto possui um voo:\n";
+    //g.getAirportByLocal(a);
+
+    cout << "Descobrir o caminho mais curto de MAG a JFK: \n";
+    string s1 = "JFK";
+    string s2 = "MAG";
+    g.getShortPath(s1, s2);
     return 0;
 }
