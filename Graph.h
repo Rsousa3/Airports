@@ -11,18 +11,20 @@
 #include <set>
 #include <stack>
 #include "Position.h"
+#include "Airport.h"
 
 using namespace std;
 
 class Graph {
     struct Edge {
         int dest;   // Destination node
-        string weight; // Airline code
+        string weight; // Airline code [MAYBE ADD A SPECIFIC PARAMETER FOR AIRLINE]
     };
 
     struct Node {
         list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;   // As the node been visited on a search?
+        Airport airport;
     };
 
     int n;              // Graph size (vertices are numbered from 1 to n)
@@ -32,10 +34,13 @@ class Graph {
 public:
     Graph(int nodes, bool dir = false);
     //vector<Node> getNodes() {return nodes;}
+    void addAirport(int node, Airport a);
     void addEdge(int src, int des, string weight = "");
-    vector<int> getDestInfo(int n, bool allDest = false);
+    vector<Airport> getDestInfo(int n, bool allDest = false);
     //set<string> getCountries(int n);
     set<string> getAirlines(int n);
-    stack<int> getShortestPath(int src, int dest);
+    stack<Airport> getShortestPath(int src, int dest);
+    vector<int> findAirportsByCity(string name);
+    vector<int> findAirportByPos(Position pos, double x);
 };
 #endif //UNTITLED1_GRAPH_H

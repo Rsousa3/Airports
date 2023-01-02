@@ -15,19 +15,20 @@ using namespace std;
 
 class Gestor {
     unordered_map<string, int> codes;
-    unordered_map<int, Airport> airports;
+    //unordered_map<int, Airport> airports; //now useless. DELETE LATER
     unordered_map<string, Airport> code_airp; //talvez não seja necessário
     unordered_map<string, Airline> code_airline;
     Graph graph;
 
 public:
     Gestor();
+    Graph getGraph();
     void readAirports();
     void readAirlines();
     void readFlights();
-    double Haversine(Position p1, Position p2);
-    vector<int> findAirportsByPos(Position pos, double x);
-    vector<int> findAirportsByCity(string code);
+    //double Haversine(Position p1, Position p2);
+    //vector<int> findAirportsByPos(Position pos, double x);
+    //vector<int> findAirportsByCity(string code); TEMP
     void getAirportInfo(string aCode, bool allD = false);
     void getFlightAirlines(string aCode);
     void getAirportByLocal(string aCode);

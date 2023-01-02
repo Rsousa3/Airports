@@ -16,5 +16,6 @@ public:
     Position(double px, double py);
     double getLat();
     double getLon();
+    double Haversine(Position p2);
 };
 #endif //UNTITLED1_POSITION_H

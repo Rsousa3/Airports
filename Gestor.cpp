@@ -5,7 +5,6 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include <cmath>
 #include <iostream>
 #include <set>
 #include <stack>
@@ -17,6 +16,8 @@ using namespace std;
 
 
 Gestor::Gestor(): graph(3019, true) {}
+
+Graph Gestor::getGraph() {return graph;}
 
 void Gestor::readAirports() {
     vector<string> actLine(6);
@@ -49,9 +50,11 @@ void Gestor::readAirports() {
         Position pos(lat, lon);
         Airport a(airCode, airName, c, pos);
 
+        graph.addAirport(count, a);
+
         codes.insert({airCode, count});
         code_airp.insert({airCode, a});
-        airports.insert({count, a});
+        //airports.insert({count, a});
         count++;
     }
 }
@@ -111,7 +114,7 @@ void Gestor::readFlights() {
     //return graph;
 }
 
-double Gestor::Haversine(Position p1, Position p2) {
+/*double Gestor::Haversine(Position p1, Position p2) {
     //distâncias
     double dLat = (p2.getLat() - p1.getLat()) * M_PI / 180.0;
     double dLon = (p2.getLon() - p1.getLon()) * M_PI / 180.0;
@@ -125,9 +128,9 @@ double Gestor::Haversine(Position p1, Position p2) {
     double rad = 6371;
     double c = 2 * asin(sqrt(a));
     return rad * c;
-}
+} */
 
-vector<int> Gestor::findAirportsByPos(Position pos, double x) {
+/*vector<int> Gestor::findAirportsByPos(Position pos, double x) {
     vector<int> values;
     float curDist;
     string curAirp;
@@ -141,9 +144,9 @@ vector<int> Gestor::findAirportsByPos(Position pos, double x) {
         }
     }
     return values;
-}
+} */
 
-vector<int> Gestor::findAirportsByCity(string code) {
+/*vector<int> Gestor::findAirportsByCity(string code) {
     vector<int> values;
     for (int i = 1; i < 3020; i++) {
         Airport a = airports[i];
@@ -152,29 +155,29 @@ vector<int> Gestor::findAirportsByCity(string code) {
         }
     }
     return values;
-}
+} */
 
 void Gestor::getAirportInfo(string aCode, bool allD) {
     int n = codes[aCode];
-    vector<int> dests;
+    vector<Airport> dests;
     dests = graph.getDestInfo(n, allD);
-    Airport src = airports[n];
+    Airport src = code_airp[aCode];
     if (!allD) {
         cout << "Existe(m) " << dests.size() << " voo(s) para destinos diferentes a partir do aeroporto " << src.getName() << ":\n";
     }
     else {
         cout << "Existe(m) " << dests.size() << " voo(s) a partir do aeroporto " << src.getName() << " :\n";
     }
-    for (int dest : dests) {
-        Airport a = airports[dest];
-        cout << "Aeroporto " << a.getName() << ", " << a.getCityName() << "\n";
+    for (auto dest : dests) {
+        cout << "Aeroporto " << dest.getName() << ", " << dest.getCityName() << "\n";
     }
 }
 
 void Gestor::getFlightAirlines(string aCode) {
     int n = codes[aCode];
     set<string> airlines = graph.getAirlines(n);
-    Airport src = airports[n];
+    //Airport src = airports[n];
+    Airport src = code_airp[aCode];
     cout << "Existe(m) " << airlines.size() << " companhia(s) aérea(s) diferente(s) com voos em " << src.getName() << ":\n";
     for (string line : airlines) {
         Airline aLine = code_airline[line];
@@ -184,12 +187,12 @@ void Gestor::getFlightAirlines(string aCode) {
 
 void Gestor::getAirportByLocal(string aCode) {
     int n = codes[aCode];
-    vector<int> airps = graph.getDestInfo(n);
-    Airport src = airports[n];
+    vector<Airport> airps = graph.getDestInfo(n);
+    Airport src = code_airp[aCode];
     set<City> locais;
     for (auto a : airps) {
-        Airport cur = airports[a];
-        locais.insert(cur.getCity());
+        //Airport cur = airports[a];
+        locais.insert(a.getCity());
     }
     cout << "O aeroporto " << src.getName() << " possui voos para " << locais.size() << " locais diferentes:\n";
     for (auto p : locais) {
@@ -200,14 +203,14 @@ void Gestor::getAirportByLocal(string aCode) {
 void Gestor::getShortPath(string src, string des, bool filterLine) {
     int s = codes[src];
     int d = codes[des];
-    stack<int> path = graph.getShortestPath(s, d);
-    int cur;
-    while (path.top() != d) {
+    stack<Airport> path = graph.getShortestPath(s, d);
+    Airport cur;
+    while (path.top().getCode() != des) {
         cur = path.top();
-        Airport curPort = airports[cur];
-        cout << curPort.getCode() << " - ";
+        //Airport curPort = airports[cur];
+        cout << cur.getCode() << " - ";
         path.pop();
     }
-    Airport last = airports[d];
+    Airport last = code_airp[des];
     cout << last.getCode() << "\n";
 }
