@@ -39,9 +39,10 @@ public:
     vector<Airport> getDestInfo(int no, int flights = 1);
     //set<string> getCountries(int n);
     set<string> getAirlines(int no, int flights);
-    stack<Airport> getShortestPath(int src, int dest, bool limit = false, vector<string> lines = vector<string>());
+    stack<Airport> getShortestPath(int src, int dest, bool limit = false, set<string> lines = set<string>());
     vector<int> findAirportsByCity(string name);
     vector<int> findAirportByPos(Position pos, double x);
     int countFlights(int no);
+    string getAirportCode(int ap);
 };
 #endif //UNTITLED1_GRAPH_H

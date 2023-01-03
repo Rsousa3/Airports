@@ -9,6 +9,7 @@
 #include <iostream>
 #include <set>
 #include <stack>
+#include <climits>
 #include "Gestor.h"
 #include "Airport.h"
 #include "Graph.h"
@@ -205,12 +206,12 @@ void Gestor::getAirportByLocal(string aCode, int flights, bool city) {
     }
 }
 
-void Gestor::getShortPath(string src, string des, vector<string> Airlines, bool filter) {
+void Gestor::getShortPath(string src, string des, set<string> Airlines, bool filter) {
     int s = codes[src];
     int d = codes[des];
     stack<Airport> path = graph.getShortestPath(s, d, filter, Airlines);
     Airport cur;
-    if (path.empty()) {cout << "VAZIO\n";}
+    if (path.empty()) {cout << "Não existe trajeto que satisfaça as condições dadas.\n";}
     else {
         while (path.top().getCode() != des) {
             cur = path.top();
@@ -228,4 +229,34 @@ void Gestor::getFlightCount(string aCode) {
     Airport a = code_airp[aCode];
     int count = graph.countFlights(n);
     cout << "Existe(m) " << count << " voo(s) a partir do aeroporto " << a.getName() << ".\n";
+}
+
+void Gestor::getShortestPath(vector<int> srcs, vector<int> dests, set<string> aLines, bool limit) {
+    int min = INT_MAX;
+    int bestSrc, bestDes;
+    stack<Airport> path;
+    for (int s : srcs) {
+        for (int d : dests) {
+            path = graph.getShortestPath(s, d, limit, aLines);
+            if (path.empty()) continue;
+            if (path.size() < min) {min = path.size(); bestSrc = s; bestDes = d;}
+        }
+    }
+    path = graph.getShortestPath(bestSrc, bestDes, limit, aLines);
+    Airport cur;
+    string cDes = graph.getAirportCode(bestDes);
+    if (path.empty()) {cout << "Não existe trajeto que satisfaça as condições dadas.\n";}
+    else {
+        while (path.top().getCode() != cDes) {
+            cur = path.top();
+            cout << cur.getCode() << " - ";
+            path.pop();
+        }
+        Airport last = code_airp[cDes];
+        cout << last.getCode() << "\n";
+    }
+}
+
+unordered_map<string, int> Gestor::getCodes() {
+    return codes;
 }

@@ -84,7 +84,7 @@ set<string> Graph::getAirlines(int no, int flights) {
     return res;
 }
 
-stack<Airport> Graph::getShortestPath(int src, int dest, bool limit, vector<string> lines) {
+stack<Airport> Graph::getShortestPath(int src, int dest, bool limit, set<string> lines) {
     stack<Airport> res;
     vector<int> prevs(n + 1, 0);
     prevs[src] = -1;
@@ -156,4 +156,8 @@ vector<int> Graph::findAirportByPos(Position pos, double x) {
 
 int Graph::countFlights(int no) {
     return nodes[no].adj.size();
+}
+
+string Graph::getAirportCode(int ap) {
+    return nodes[ap].airport.getCode();
 }

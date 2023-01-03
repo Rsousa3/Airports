@@ -23,6 +23,7 @@ class Gestor {
 public:
     Gestor();
     Graph getGraph();
+    unordered_map<string, int> getCodes();
     void readAirports();
     void readAirlines();
     void readFlights();
@@ -32,7 +33,8 @@ public:
     void getAirportInfo(string aCode, int flights = 1, bool allD = false);
     void getFlightAirlines(string aCode, int flights);
     void getAirportByLocal(string aCode, int flights, bool city);
-    void getShortPath(string src, string des, vector<string> Airlines, bool filter = false);
+    void getShortPath(string src, string des, set<string> Airlines, bool filter = false);
     void getFlightCount(string aCode);
+    void getShortestPath(vector<int> srcs, vector<int> dests, set<string> Alines, bool filter = false);
 };
 #endif //UNTITLED1_GESTOR_H
