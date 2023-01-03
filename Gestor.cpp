@@ -159,7 +159,7 @@ void Gestor::readFlights() {
     return values;
 } */
 
-void Gestor::getAirportInfo(string aCode, int flights, bool allD) {
+void Gestor::getAirportInfo(string aCode, int flights) {
     int n = codes[aCode];
     vector<Airport> dests;
     dests = graph.getDestInfo(n, flights);
@@ -206,7 +206,7 @@ void Gestor::getAirportByLocal(string aCode, int flights, bool city) {
     }
 }
 
-void Gestor::getShortPath(string src, string des, set<string> Airlines, bool filter) {
+/*void Gestor::getShortPath(string src, string des, set<string> Airlines, bool filter) { NOW USELESS
     int s = codes[src];
     int d = codes[des];
     stack<Airport> path = graph.getShortestPath(s, d, filter, Airlines);
@@ -222,7 +222,7 @@ void Gestor::getShortPath(string src, string des, set<string> Airlines, bool fil
         Airport last = code_airp[des];
         cout << last.getCode() << "\n";
     }
-}
+}*/
 
 void Gestor::getFlightCount(string aCode) {
     int n = codes[aCode];

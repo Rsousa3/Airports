@@ -14,13 +14,14 @@ int main() {
 
     cout << "Indique a operação que pretende realizar:\n 1. Descobrir trajeto mais curto entre dois aeroportos.\n 2. Obter informações sobre um aeroporto.\n";
     int opc;
+    string input;
+    int ninput;
     cin >> opc;
     if (opc == 1) {
 //-------------------------------------SHORTEST_PATH----------------
         vector<int> partidas;
         vector<int> chegadas;
         set<string> companhias;
-        string input;
 
         double pLat, pLon, dist;
         Position position;
@@ -48,7 +49,7 @@ int main() {
             cout << "Indique a posição:\n Latitude: ";
             cin >> pLat;
             cout <<"\n Longitude: ";
-            cin >> pLon; cout <<"\n";
+            cin >> pLon;
             position = Position(pLat, pLon);
             cout << "A que distância máxima os aeroportos devem estar distanciados (em quilômetros): ";
             cin >> dist; cout << "\n";
@@ -76,7 +77,7 @@ int main() {
             cout << "Indique a posição:\n Latitude: ";
             cin >> pLat;
             cout <<"\n Longitude: ";
-            cin >> pLon; cout <<"\n";
+            cin >> pLon;
             position = Position(pLat, pLon);
             cout << "A que distância máxima os aeroportos devem estar distanciados (em quilômetros): ";
             cin >> dist; cout << "\n";
@@ -94,7 +95,10 @@ int main() {
             while (loop) {
                 cout << "Acrescentar companhia aérea?\n 1. Sim\n 2. Não\n";
                 cin >> opc;
-                if (opc == 1) {companhias.insert(input);}
+                if (opc == 1) {
+                    cout << "Introduza o código da companhia aérea:\n";
+                    cin >> input;
+                    companhias.insert(input);}
                 if (opc == 2) {loop = false;}
             }
         }
@@ -104,6 +108,38 @@ int main() {
     }
     else if (opc == 2) {
 //-------------------------INFORMATION----------------------------
+        cout << "Selecione o tipo de informação que pretende obter:\n 1. Nº de voos de um aeroporto\n 2. Informações de voos\n";
+        cin >> opc;
+//------------------------COUNT VOOS------------------------------------------
+        if (opc == 1) {
+            cout << "Introduza o código do aeroporto:\n";
+            cin >> input;
+            g.getFlightCount(input);
+        }
+//-------------------------INFO VOOS--------------------------------------
+        else if (opc == 2) {
+            cout << "Introduza o código do aeroporto: ";
+            cin >> input;
+            cout << "Introduza um número máximo de voos permitidos a partir do aeroporto para obter informação: "; //se calhar mudar phrasing
+            cin >> ninput;
+            cout << "Que tipo de informação pretende obter?\n 1. Destinos\n 2. Local\n 3. Companhias aéreas\n";
+            cin >> opc;
+//-------------------------DESTINOS----------------------------------------
+            if (opc == 1) {
+                g.getAirportInfo(input, ninput);
+            }
+//-------------------------LOCAL----------------------------------------------
+            else if (opc == 2) {
+                cout << "Pretende obter informação das cidades alcançadas ou dos países?\n 1. Cidades\n 2. Países\n";
+                cin >> opc;
+                if (opc == 1) g.getAirportByLocal(input, ninput, true);
+                else if (opc == 2) g.getAirportByLocal(input, ninput, false);
+            }
+//-------------------------COMPANHIAS AEREAS--------------------------------------
+            else if (opc == 3) {
+                g.getFlightAirlines(input, ninput);
+            }
+        }
     }
 
 

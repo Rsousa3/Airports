@@ -30,10 +30,10 @@ public:
     //double Haversine(Position p1, Position p2);
     //vector<int> findAirportsByPos(Position pos, double x);
     //vector<int> findAirportsByCity(string code); TEMP
-    void getAirportInfo(string aCode, int flights = 1, bool allD = false);
+    void getAirportInfo(string aCode, int flights);
     void getFlightAirlines(string aCode, int flights);
     void getAirportByLocal(string aCode, int flights, bool city);
-    void getShortPath(string src, string des, set<string> Airlines, bool filter = false);
+    //void getShortPath(string src, string des, set<string> Airlines, bool filter = false); NOW USELESS
     void getFlightCount(string aCode);
     void getShortestPath(vector<int> srcs, vector<int> dests, set<string> Alines, bool filter = false);
 };
