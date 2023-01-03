@@ -153,3 +153,7 @@ vector<int> Graph::findAirportByPos(Position pos, double x) {
     }
     return values;
 }
+
+int Graph::countFlights(int no) {
+    return nodes[no].adj.size();
+}

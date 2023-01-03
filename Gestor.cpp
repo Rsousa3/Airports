@@ -222,3 +222,10 @@ void Gestor::getShortPath(string src, string des, vector<string> Airlines, bool 
         cout << last.getCode() << "\n";
     }
 }
+
+void Gestor::getFlightCount(string aCode) {
+    int n = codes[aCode];
+    Airport a = code_airp[aCode];
+    int count = graph.countFlights(n);
+    cout << "Existe(m) " << count << " voo(s) a partir do aeroporto " << a.getName() << ".\n";
+}

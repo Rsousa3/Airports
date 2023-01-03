@@ -46,6 +46,8 @@ int main() {
     //lines.push_back(ar1); lines.push_back(ar2);
     lines.push_back(ar3);
     g.getShortPath(s1, s2, lines, true);
+    cout << "Contar voos que saem do aeroporto " << s1 << " :\n";
+    g.getFlightCount(s1);
     cout << "FIM";
     return 0;
 }

@@ -33,5 +33,6 @@ public:
     void getFlightAirlines(string aCode, int flights);
     void getAirportByLocal(string aCode, int flights, bool city);
     void getShortPath(string src, string des, vector<string> Airlines, bool filter = false);
+    void getFlightCount(string aCode);
 };
 #endif //UNTITLED1_GESTOR_H

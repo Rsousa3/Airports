@@ -42,5 +42,6 @@ public:
     stack<Airport> getShortestPath(int src, int dest, bool limit = false, vector<string> lines = vector<string>());
     vector<int> findAirportsByCity(string name);
     vector<int> findAirportByPos(Position pos, double x);
+    int countFlights(int no);
 };
 #endif //UNTITLED1_GRAPH_H
