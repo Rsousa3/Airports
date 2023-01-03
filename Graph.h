@@ -39,7 +39,7 @@ public:
     vector<Airport> getDestInfo(int no, int flights = 1);
     //set<string> getCountries(int n);
     set<string> getAirlines(int no, int flights);
-    stack<Airport> getShortestPath(int src, int dest);
+    stack<Airport> getShortestPath(int src, int dest, bool limit = false, vector<string> lines = vector<string>());
     vector<int> findAirportsByCity(string name);
     vector<int> findAirportByPos(Position pos, double x);
 };

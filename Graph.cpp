@@ -84,7 +84,7 @@ set<string> Graph::getAirlines(int no, int flights) {
     return res;
 }
 
-stack<Airport> Graph::getShortestPath(int src, int dest) {
+stack<Airport> Graph::getShortestPath(int src, int dest, bool limit, vector<string> lines) {
     stack<Airport> res;
     vector<int> prevs(n + 1, 0);
     prevs[src] = -1;
@@ -93,9 +93,16 @@ stack<Airport> Graph::getShortestPath(int src, int dest) {
     for (int v = 1; v <= n; v++) {nodes[v].visited = false;}
     unvisited.push(src);
     nodes[src].visited = true;
-    while (!unvisited.empty() || !nodes[dest].visited) { //para quando o dest é encontrado ou, se não for, quando não houver mais destinos)
+    while (!unvisited.empty() && !nodes[dest].visited) { //para quando o dest é encontrado ou, se não for, quando não houver mais destinos)
         int u = unvisited.front(); unvisited.pop();
         for (auto e : nodes[u].adj) {
+            if (limit) {
+                bool add = false;
+                for (auto l : lines) {
+                    if (l == e.weight) add = true;
+                }
+                if (!add) continue;
+            }
             int des = e.dest;
             if (!nodes[des].visited) {
                 prevs[des] = u;

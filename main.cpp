@@ -11,7 +11,7 @@ int main() {
     Graph graph = g.getGraph();
     std::cout << "Hello, World!" << std::endl;
 
-
+/*
     cout << "Verificar funções:\n"; //TESTE DE FUNÇÕES
     Position p(36.999999,14.614400);
     //vector<int> iRes = g.findAirportsByPos(p, 90);
@@ -35,10 +35,17 @@ int main() {
 
     cout << "Descobrir locais para os quais um aeroporto possui um voo:\n";
     g.getAirportByLocal(a, 1, false);
-
-    string s1 = "LIS";
-    string s2 = "JFK";
+*/
+    string s1 = "JFK";
+    string s2 = "LIS";
     cout << "Descobrir o caminho mais curto de " << s1 << " a " << s2 << ": \n";
-    g.getShortPath(s1, s2);
+    string ar1 = "RYR";
+    string ar2 = "TAP";
+    string ar3 = "USA";
+    vector<string> lines;
+    //lines.push_back(ar1); lines.push_back(ar2);
+    lines.push_back(ar3);
+    g.getShortPath(s1, s2, lines, true);
+    cout << "FIM";
     return 0;
 }

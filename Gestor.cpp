@@ -2,6 +2,7 @@
 // Created by ricardo on 29-12-2022.
 //
 
+#include <utility>
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -204,17 +205,20 @@ void Gestor::getAirportByLocal(string aCode, int flights, bool city) {
     }
 }
 
-void Gestor::getShortPath(string src, string des, bool filterLine) {
+void Gestor::getShortPath(string src, string des, vector<string> Airlines, bool filter) {
     int s = codes[src];
     int d = codes[des];
-    stack<Airport> path = graph.getShortestPath(s, d);
+    stack<Airport> path = graph.getShortestPath(s, d, filter, Airlines);
     Airport cur;
-    while (path.top().getCode() != des) {
-        cur = path.top();
-        //Airport curPort = airports[cur];
-        cout << cur.getCode() << " - ";
-        path.pop();
+    if (path.empty()) {cout << "VAZIO\n";}
+    else {
+        while (path.top().getCode() != des) {
+            cur = path.top();
+            //Airport curPort = airports[cur];
+            cout << cur.getCode() << " - ";
+            path.pop();
+        }
+        Airport last = code_airp[des];
+        cout << last.getCode() << "\n";
     }
-    Airport last = code_airp[des];
-    cout << last.getCode() << "\n";
 }
