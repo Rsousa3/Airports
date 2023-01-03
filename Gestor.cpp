@@ -157,25 +157,20 @@ void Gestor::readFlights() {
     return values;
 } */
 
-void Gestor::getAirportInfo(string aCode, bool allD) {
+void Gestor::getAirportInfo(string aCode, int flights, bool allD) {
     int n = codes[aCode];
     vector<Airport> dests;
-    dests = graph.getDestInfo(n, allD);
+    dests = graph.getDestInfo(n, flights);
     Airport src = code_airp[aCode];
-    if (!allD) {
-        cout << "Existe(m) " << dests.size() << " voo(s) para destinos diferentes a partir do aeroporto " << src.getName() << ":\n";
-    }
-    else {
-        cout << "Existe(m) " << dests.size() << " voo(s) a partir do aeroporto " << src.getName() << " :\n";
-    }
+    cout << "Existe(m) " << dests.size() << " voo(s) para destinos diferentes a partir do aeroporto " << src.getName() << ":\n";
     for (auto dest : dests) {
         cout << "Aeroporto " << dest.getName() << ", " << dest.getCityName() << "\n";
     }
 }
 
-void Gestor::getFlightAirlines(string aCode) {
+void Gestor::getFlightAirlines(string aCode, int flights) {
     int n = codes[aCode];
-    set<string> airlines = graph.getAirlines(n);
+    set<string> airlines = graph.getAirlines(n, flights);
     //Airport src = airports[n];
     Airport src = code_airp[aCode];
     cout << "Existe(m) " << airlines.size() << " companhia(s) aérea(s) diferente(s) com voos em " << src.getName() << ":\n";
@@ -185,18 +180,27 @@ void Gestor::getFlightAirlines(string aCode) {
     }
 }
 
-void Gestor::getAirportByLocal(string aCode) {
+void Gestor::getAirportByLocal(string aCode, int flights, bool city) {
     int n = codes[aCode];
-    vector<Airport> airps = graph.getDestInfo(n);
+    vector<Airport> airps = graph.getDestInfo(n, flights);
     Airport src = code_airp[aCode];
     set<City> locais;
+    set<string> paises;
     for (auto a : airps) {
-        //Airport cur = airports[a];
         locais.insert(a.getCity());
+        paises.insert(a.getCity().getCountry());
     }
-    cout << "O aeroporto " << src.getName() << " possui voos para " << locais.size() << " locais diferentes:\n";
-    for (auto p : locais) {
-        cout << p.getCity() << " - " << p.getCountry() << "\n";
+    if (city) {
+        cout << "O aeroporto " << src.getName() << " possui voo(s) para " << locais.size() << " cidade(s) diferente(s):\n";
+        for (auto p : locais) {
+            cout << p.getCity() << " - " << p.getCountry() << "\n";
+        }
+    }
+    else {
+        cout << "O aeroporto " << src.getName() << " possui voo(s) para " << paises.size() << " país(es) diferente(s):\n";
+        for (auto p : paises) {
+            cout << p << "\n";
+        }
     }
 }
 

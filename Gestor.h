@@ -29,9 +29,9 @@ public:
     //double Haversine(Position p1, Position p2);
     //vector<int> findAirportsByPos(Position pos, double x);
     //vector<int> findAirportsByCity(string code); TEMP
-    void getAirportInfo(string aCode, bool allD = false);
-    void getFlightAirlines(string aCode);
-    void getAirportByLocal(string aCode);
+    void getAirportInfo(string aCode, int flights = 1, bool allD = false);
+    void getFlightAirlines(string aCode, int flights);
+    void getAirportByLocal(string aCode, int flights, bool city);
     void getShortPath(string src, string des, bool filterLine = false);
 };
 #endif //UNTITLED1_GESTOR_H

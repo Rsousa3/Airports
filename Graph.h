@@ -36,9 +36,9 @@ public:
     //vector<Node> getNodes() {return nodes;}
     void addAirport(int node, Airport a);
     void addEdge(int src, int des, string weight = "");
-    vector<Airport> getDestInfo(int n, bool allDest = false);
+    vector<Airport> getDestInfo(int no, int flights = 1);
     //set<string> getCountries(int n);
-    set<string> getAirlines(int n);
+    set<string> getAirlines(int no, int flights);
     stack<Airport> getShortestPath(int src, int dest);
     vector<int> findAirportsByCity(string name);
     vector<int> findAirportByPos(Position pos, double x);

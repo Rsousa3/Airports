@@ -25,16 +25,16 @@ int main() {
 
 //--------------MENU--------------------------------------
     //cout << "Descobrir a melhor maneira de voar de um local para o outro (menor nº de voos)";
-    string a = "OPO";
+    string a = "MAG";
     cout << "Descobrir os voos do aeroporto " << a << ":\n";
 
-    g.getAirportInfo(a); // 161 para JFK, 7 para MAG, 61 para OPO
+    //g.getAirportInfo(a, 1); // 161 para JFK, 7 para MAG, 61 para OPO
 
-    //cout << "Descobrir as airlines com voos num aeroporto \n";
-    //g.getFlightAirlines(a);
+    cout << "Descobrir as airlines com voos num aeroporto \n";
+    g.getFlightAirlines(a, 2);
 
-    //cout << "Descobrir locais para os quais um aeroporto possui um voo:\n";
-    //g.getAirportByLocal(a);
+    cout << "Descobrir locais para os quais um aeroporto possui um voo:\n";
+    g.getAirportByLocal(a, 1, false);
 
     string s1 = "LIS";
     string s2 = "JFK";

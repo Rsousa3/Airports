@@ -21,7 +21,7 @@ void Graph::addEdge(int src, int des, string weight) {
     if (!hasDir) nodes[des].adj.push_back({src, weight});
 }
 
-vector<Airport> Graph::getDestInfo(int n, bool allDest) {
+/* vector<Airport> Graph::getDestInfo(int n, bool allDest) {
     vector<Airport> res;
     auto node = nodes[n];
     if (!allDest) {
@@ -39,24 +39,58 @@ vector<Airport> Graph::getDestInfo(int n, bool allDest) {
         }
     }
     return res;
+} */
+
+vector<Airport> Graph::getDestInfo(int no, int flights) {
+    vector<Airport> res;
+    queue<int> q;
+    set<int> temp;
+    for (int v = 1; v <= n; v++) nodes[v].visited = false;
+    q.push(no);
+    nodes[no].visited = true;
+    while (!q.empty() && flights != 0) {
+        int u = q.front(); q.pop();
+        for (auto i: nodes[u].adj) {
+            if (!nodes[i.dest].visited) {
+                auto w = i.dest;
+                res.push_back(nodes[w].airport);
+                nodes[w].visited = true;
+                q.push(i.dest);
+            }
+        }
+        flights--;
+    }
+    return res;
 }
 
-set<string> Graph::getAirlines(int n) {
+set<string> Graph::getAirlines(int no, int flights) {
     set<string> res;
-    auto node = nodes[n];
-    for (auto dest : node.adj) {
-        res.insert(dest.weight);
+    queue<int> q;
+    for (int v = 1; v <= n; v++) nodes[v].visited = false;
+    q.push(no);
+    nodes[no].visited = true;
+    while (!q.empty() && flights != 0) {
+        int u = q.front(); q.pop();
+        for (auto dest : nodes[u].adj) {
+            int w = dest.dest;
+            if (!nodes[w].visited) {
+                res.insert(dest.weight);
+                q.push(w);
+                nodes[w].visited = true;
+            }
+        }
+        flights--;
     }
     return res;
 }
 
 stack<Airport> Graph::getShortestPath(int src, int dest) {
     stack<Airport> res;
-    vector<int> prevs(3020, 0);
+    vector<int> prevs(n + 1, 0);
     prevs[src] = -1;
-    vector<int> dist(3020, 0);
+    vector<int> dist(n + 1, 0);
     queue<int> unvisited;
-    for (int v = 1; v < 3020; v++) {nodes[v].visited = false;}
+    for (int v = 1; v <= n; v++) {nodes[v].visited = false;}
     unvisited.push(src);
     nodes[src].visited = true;
     while (!unvisited.empty() || !nodes[dest].visited) { //para quando o dest é encontrado ou, se não for, quando não houver mais destinos)
