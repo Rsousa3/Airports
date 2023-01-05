@@ -25,6 +25,8 @@ class Graph {
         list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited;   // As the node been visited on a search?
         Airport airport;
+        int low;
+        int num;
     };
 
     int n;              // Graph size (vertices are numbered from 1 to n)
@@ -44,5 +46,7 @@ public:
     vector<int> findAirportByPos(Position pos, double x);
     int countFlights(int no);
     string getAirportCode(int ap);
+    void dfsArt(int v, int& order, list<Airport>& l);
+    list<Airport> ArtPoints();
 };
 #endif //UNTITLED1_GRAPH_H

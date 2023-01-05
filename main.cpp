@@ -12,7 +12,7 @@ int main() {
     auto codes = g.getCodes();
     cout << "-------------------------------------menu-------------------------------------------------------\n";
 
-    cout << "Indique a operação que pretende realizar:\n 1. Descobrir trajeto mais curto entre dois aeroportos.\n 2. Obter informações sobre um aeroporto.\n";
+    cout << "Indique a operação que pretende realizar:\n 1. Descobrir trajeto mais curto entre dois aeroportos.\n 2. Obter informações sobre um aeroporto.\n 3. Obter pontos de articulação.\n";
     int opc;
     string input;
     int ninput;
@@ -141,7 +141,10 @@ int main() {
             }
         }
     }
-
+//------------------------ARTICULATE POINTS---------------------------------------
+    else if (opc == 3) {
+        g.getArticulationPoints();
+    }
 
     /*cout << "Ver caminho mais curto em Portugal para "
 

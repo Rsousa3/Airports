@@ -20,3 +20,5 @@ string Airport::getCityName() {return city.getCity();}
 string Airport::getCode() {return code;}
 
 string Airport::getName() {return name;}
+
+string Airport::getCountryName() {return city.getCountry();}

@@ -36,5 +36,6 @@ public:
     //void getShortPath(string src, string des, set<string> Airlines, bool filter = false); NOW USELESS
     void getFlightCount(string aCode);
     void getShortestPath(vector<int> srcs, vector<int> dests, set<string> Alines, bool filter = false);
+    void getArticulationPoints();
 };
 #endif //UNTITLED1_GESTOR_H

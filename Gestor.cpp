@@ -260,3 +260,11 @@ void Gestor::getShortestPath(vector<int> srcs, vector<int> dests, set<string> aL
 unordered_map<string, int> Gestor::getCodes() {
     return codes;
 }
+
+void Gestor::getArticulationPoints() {
+    list<Airport> aPoints = graph.ArtPoints();
+    cout << "Existem " << aPoints.size() << " pontos de articulação:\n";
+    for (Airport a : aPoints) {
+        cout << "Aeroporto " << a.getName() << " - " << a.getCityName() << " (" << a.getCountryName() << ")\n";
+    }
+}

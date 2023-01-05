@@ -161,3 +161,41 @@ int Graph::countFlights(int no) {
 string Graph::getAirportCode(int ap) {
     return nodes[ap].airport.getCode();
 }
+
+void Graph::dfsArt(int v, int &order, list<Airport> &l) {
+    nodes[v].visited = true;
+    nodes[v].num = nodes[v].low = order++;
+    int children = 0;
+    bool articulation = false;
+
+    for (Edge e : nodes[v].adj) {
+        int w = e.dest;
+        if (!nodes[w].visited) {
+            children++;
+            dfsArt(w, order, l);
+            nodes[v].low = min(nodes[v].low, nodes[w].low);
+            if (nodes[w].low >= nodes[v].num) articulation = true;
+        }
+        else
+            nodes[v].low = min(nodes[v].low, nodes[w].num);
+    }
+
+    if ((nodes[v].num == 1 && children > 1) || (nodes[v].num > 1 && articulation))
+        l.push_front(nodes[v].airport);
+}
+
+list<Airport> Graph::ArtPoints() {
+    list<Airport> aps;
+    int order = 1;
+    for(int i =1; i <=n; i++){
+        nodes[i].visited=false;
+        nodes[i].low=0;
+        nodes[i].num=0;
+    }
+    for(int i =1; i <=n; i++){
+        if(!nodes[i].visited) {
+            dfsArt(i, order, aps);
+        }
+    }
+    return aps;
+}
