@@ -199,3 +199,31 @@ list<Airport> Graph::ArtPoints() {
     }
     return aps;
 }
+
+vector<int> Graph::findAirportsByCountry(string c) {
+    vector<int> ans;
+    for (int i = 1; i <= n; i++) {
+        Airport a = nodes[i].airport;
+        if (a.getCountryName() == c) {ans.push_back(i);}
+    }
+    return ans;
+}
+
+int Graph::countCountryFlights(vector<int> ns) {
+    int count = 0;
+    for (int a : ns) {
+        count += countFlights(a);
+    }
+    return count;
+}
+
+int Graph::countAirlines(vector<int> ns) {
+    set<string> aLines;
+    int count = 0;
+    for (int a : ns) {
+        for (Edge e : nodes[a].adj) {
+            aLines.insert(e.weight);
+        }
+    }
+    return aLines.size();
+}

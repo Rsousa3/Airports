@@ -56,6 +56,8 @@ void Gestor::readAirports() {
 
         codes.insert({airCode, count});
         code_airp.insert({airCode, a});
+        cities.insert(city);
+        countries.insert(country);
         //airports.insert({count, a});
         count++;
     }
@@ -267,4 +269,25 @@ void Gestor::getArticulationPoints() {
     for (Airport a : aPoints) {
         cout << "Aeroporto " << a.getName() << " - " << a.getCityName() << " (" << a.getCountryName() << ")\n";
     }
+}
+
+void Gestor::getStats(string country) {
+    vector<int> cods = graph.findAirportsByCountry(country);
+    int aCount = cods.size();
+    int fCount = graph.countCountryFlights(cods);
+    int alCount = graph.countAirlines(cods);
+    cout << "O país " << country << " contém " << aCount << " aeroporto(s) e " << fCount << " voo(s) de " << alCount << " companhia(s) aérea(s) diferente(s).\n";
+}
+
+bool Gestor::checkInput(string inp, bool code) {
+    if (code && code_airp.find(inp) == code_airp.end()) {return false;}
+    else if (!code && code_airline.find(inp) == code_airline.end()) {return false;}
+    return true;
+}
+
+
+bool Gestor::checkInputLocal(string inp, bool city) {
+    if (city && cities.find(inp) == cities.end()) {return false;}
+    else if (!city && countries.find(inp) == countries.end()) {return false;}
+    return true;
 }

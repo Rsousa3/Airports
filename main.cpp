@@ -12,7 +12,7 @@ int main() {
     auto codes = g.getCodes();
     cout << "-------------------------------------menu-------------------------------------------------------\n";
 
-    cout << "Indique a operação que pretende realizar:\n 1. Descobrir trajeto mais curto entre dois aeroportos.\n 2. Obter informações sobre um aeroporto.\n 3. Obter pontos de articulação.\n";
+    cout << "Indique a operação que pretende realizar:\n 1. Descobrir trajeto mais curto entre dois aeroportos.\n 2. Obter informações sobre um aeroporto.\n 3. Obter pontos de articulação.\n 4. Estatísticas de país.\n";
     int opc;
     string input;
     int ninput;
@@ -34,14 +34,15 @@ int main() {
         if (opc == 1) {
             cout << "Indique o código do aeroporto:\n";
             cin >> input;
+            if (!g.checkInput(input)) {cout << "Input inválido!"; return 0;}
             partidas.push_back(codes[input]);
         }
 //-----------------2 CIDADE--------------------------------------------
         else if (opc == 2) {
             cout << "Indique a cidade:\n";
             cin.ignore();
-            //cin >> input;
             getline(cin, input);
+            if (!g.checkInputLocal(input)) {cout << "Input inválido!"; return 0;}
             partidas = graph.findAirportsByCity(input);
         }
 //------------------3 POSIÇÃO------------------------------------------------------
@@ -62,6 +63,7 @@ int main() {
         if (opc == 1) {
             cout << "Indique o código do aeroporto:\n";
             cin >> input;
+            if (!g.checkInput(input)) {cout << "Input inválido!"; return 0;}
             chegadas.push_back(codes[input]);
         }
 //-------------------2 CIDADE------------------------------
@@ -69,7 +71,7 @@ int main() {
             cout << "Indique a cidade:\n";
             cin.ignore();
             getline(cin, input);
-            //cin >> input;
+            if (!g.checkInputLocal(input)) {cout << "Input inválido!"; return 0;}
             chegadas = graph.findAirportsByCity(input);
         }
 //-------------------3 POSIÇÃO-----------------------------------------
@@ -90,6 +92,7 @@ int main() {
             filter = true;
             cout << "Introduza o código da companhia aérea:\n";
             cin >> input;
+            if (!g.checkInput(input, false)) {cout << "Input inválido!"; return 0;}
             companhias.insert(input);
             bool loop = true;
             while (loop) {
@@ -98,6 +101,7 @@ int main() {
                 if (opc == 1) {
                     cout << "Introduza o código da companhia aérea:\n";
                     cin >> input;
+                    if (!g.checkInput(input, false)) {cout << "Input inválido! Introduza o código novamente.\n"; continue;}
                     companhias.insert(input);}
                 if (opc == 2) {loop = false;}
             }
@@ -114,12 +118,14 @@ int main() {
         if (opc == 1) {
             cout << "Introduza o código do aeroporto:\n";
             cin >> input;
+            if (!g.checkInput(input)) {cout << "Input inválido!"; return 0;}
             g.getFlightCount(input);
         }
 //-------------------------INFO VOOS--------------------------------------
         else if (opc == 2) {
             cout << "Introduza o código do aeroporto: ";
             cin >> input;
+            if (!g.checkInput(input)) {cout << "Input inválido!"; return 0;}
             cout << "Introduza um número máximo de voos permitidos a partir do aeroporto para obter informação: "; //se calhar mudar phrasing
             cin >> ninput;
             cout << "Que tipo de informação pretende obter?\n 1. Destinos\n 2. Local\n 3. Companhias aéreas\n";
@@ -144,6 +150,14 @@ int main() {
 //------------------------ARTICULATE POINTS---------------------------------------
     else if (opc == 3) {
         g.getArticulationPoints();
+    }
+//------------------------STATS-DE-PAÍS-----------------------------------------
+    else if (opc == 4) {
+        cout << "Introduza o país:\n";
+        cin.ignore();
+        getline(cin, input);
+        if (!g.checkInputLocal(input, false)) {cout << "Input inválido!"; return 0;}
+        g.getStats(input);
     }
 
     /*cout << "Ver caminho mais curto em Portugal para "

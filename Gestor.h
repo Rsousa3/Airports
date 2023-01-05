@@ -7,6 +7,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <unordered_set>
 #include "Airport.h"
 #include "Airline.h"
 #include "Graph.h"
@@ -18,6 +19,8 @@ class Gestor {
     //unordered_map<int, Airport> airports; //now useless. DELETE LATER
     unordered_map<string, Airport> code_airp; //talvez não seja necessário
     unordered_map<string, Airline> code_airline;
+    unordered_set<string> cities;
+    unordered_set<string> countries;
     Graph graph;
 
 public:
@@ -37,5 +40,8 @@ public:
     void getFlightCount(string aCode);
     void getShortestPath(vector<int> srcs, vector<int> dests, set<string> Alines, bool filter = false);
     void getArticulationPoints();
+    void getStats(string country);
+    bool checkInput(string inp, bool code = true);
+    bool checkInputLocal(string inp, bool city = true);
 };
 #endif //UNTITLED1_GESTOR_H

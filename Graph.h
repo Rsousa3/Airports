@@ -43,10 +43,13 @@ public:
     set<string> getAirlines(int no, int flights);
     stack<Airport> getShortestPath(int src, int dest, bool limit = false, set<string> lines = set<string>());
     vector<int> findAirportsByCity(string name);
+    vector<int> findAirportsByCountry(string c);
     vector<int> findAirportByPos(Position pos, double x);
     int countFlights(int no);
     string getAirportCode(int ap);
     void dfsArt(int v, int& order, list<Airport>& l);
     list<Airport> ArtPoints();
+    int countCountryFlights(vector<int> ns);
+    int countAirlines(vector<int> ns);
 };
 #endif //UNTITLED1_GRAPH_H
