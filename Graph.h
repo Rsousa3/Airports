@@ -39,7 +39,7 @@ public:
     void addEdge(int src, int des, string weight = "");
     vector<Airport> getDestInfo(int no, int flights = 1); //Recolhe os aeroportos atingíveis no máximo de n flights
     set<string> getAirlines(int no, int flights); //Recolhe as airlines presentes no máximo de n flights
-    stack<Airport> getShortestPath(int src, int dest, bool limit = false, set<string> lines = set<string>()); //Obtém o trajeto mais curto entre 2 aeroportos, limitado (ou náo) por airlines
+    stack<Airport> getShortestPath(int src, int dest, bool limit = false, set<string> lines = set<string>()); //Obtém o trajeto mais curto entre 2 aeroportos, limitado (ou náo) por airlines WORST CASE O(E x A) (A é número de airlines, se A for 0 é só O(E))
     vector<int> findAirportsByCity(string name); //Recolhe todos os aeroportos numa cidade
     vector<int> findAirportsByCountry(string c); //Recolhe todos os aeroportos num país
     vector<int> findAirportByPos(Position pos, double x); //Recolhe todos os aeroportos a um máximo de x kms de distância da posição pos
