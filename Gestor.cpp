@@ -23,7 +23,7 @@ Graph Gestor::getGraph() {return graph;}
 
 void Gestor::readAirports() {
     vector<string> actLine(6);
-    ifstream in("/home/ricardo/CLionProjects/untitled1/data/airports.csv");
+    ifstream in("data/airports.csv");
     string line, word;
     string airCode, airName, city, country;
     double lat, lon;
@@ -64,7 +64,7 @@ void Gestor::readAirports() {
 
 void Gestor::readAirlines() {
     vector<string> actLine(4);
-    ifstream in("/home/ricardo/CLionProjects/untitled1/data/airlines.csv");
+    ifstream in("data/airlines.csv");
     string line, word;
     string lineCode, name, sign, country;
 
@@ -92,7 +92,7 @@ void Gestor::readAirlines() {
 void Gestor::readFlights() {
 
     vector<string> actLine(3);
-    ifstream in("/home/ricardo/CLionProjects/untitled1/data/flights.csv");
+    ifstream in("data/flights.csv");
     string line, word;
     string src, targ, airline;
 
