@@ -16,6 +16,6 @@ public:
     Position(double px, double py);
     double getLat();
     double getLon();
-    double Haversine(Position p2);
+    double Haversine(Position p2); //Calcula a distância em kms de 2 posições
 };
 #endif //UNTITLED1_POSITION_H

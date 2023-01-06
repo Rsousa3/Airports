@@ -18,7 +18,7 @@ using namespace std;
 class Graph {
     struct Edge {
         int dest;   // Destination node
-        string weight; // Airline code [MAYBE ADD A SPECIFIC PARAMETER FOR AIRLINE]
+        string weight; // Airline code
     };
 
     struct Node {
@@ -38,18 +38,18 @@ public:
     //vector<Node> getNodes() {return nodes;}
     void addAirport(int node, Airport a);
     void addEdge(int src, int des, string weight = "");
-    vector<Airport> getDestInfo(int no, int flights = 1);
+    vector<Airport> getDestInfo(int no, int flights = 1); //Recolhe os aeroportos atingíveis no máximo de n flights
     //set<string> getCountries(int n);
-    set<string> getAirlines(int no, int flights);
-    stack<Airport> getShortestPath(int src, int dest, bool limit = false, set<string> lines = set<string>());
-    vector<int> findAirportsByCity(string name);
-    vector<int> findAirportsByCountry(string c);
-    vector<int> findAirportByPos(Position pos, double x);
-    int countFlights(int no);
+    set<string> getAirlines(int no, int flights); //Recolhe as airlines presentes no máximo de n flights
+    stack<Airport> getShortestPath(int src, int dest, bool limit = false, set<string> lines = set<string>()); //Obtém o trajeto mais curto entre 2 aeroportos, limitado (ou náo) por airlines
+    vector<int> findAirportsByCity(string name); //Recolhe todos os aeroportos numa cidade
+    vector<int> findAirportsByCountry(string c); //Recolhe todos os aeroportos num país
+    vector<int> findAirportByPos(Position pos, double x); //Recolhe todos os aeroportos a um máximo de x kms de distância da posição pos
+    int countFlights(int no); //Conta os voos a partir de um aeroporto
     string getAirportCode(int ap);
-    void dfsArt(int v, int& order, list<Airport>& l);
-    list<Airport> ArtPoints();
-    int countCountryFlights(vector<int> ns);
-    int countAirlines(vector<int> ns);
+    void dfsArt(int v, int& order, list<Airport>& l); //Recolhe os pontos de articulação para a lista l através de um dfs
+    list<Airport> ArtPoints(); //Recolhe os pontos de articulação
+    int countCountryFlights(vector<int> ns); //Conta voos de uma lista de aeroportos (pelo código)
+    int countAirlines(vector<int> ns); //Conta airlines de uma lista de aeroportos
 };
 #endif //UNTITLED1_GRAPH_H
