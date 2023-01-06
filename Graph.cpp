@@ -21,26 +21,6 @@ void Graph::addEdge(int src, int des, string weight) {
     if (!hasDir) nodes[des].adj.push_back({src, weight});
 }
 
-/* vector<Airport> Graph::getDestInfo(int n, bool allDest) {
-    vector<Airport> res;
-    auto node = nodes[n];
-    if (!allDest) {
-        set<int> temp;
-        for (auto i: node.adj) {
-            temp.insert(i.dest);
-        }
-        for (auto t : temp) {
-            res.push_back(nodes[t].airport);
-        }
-    }
-    if (allDest) {
-        for (auto i: node.adj) {
-            res.push_back(nodes[i.dest].airport);
-        }
-    }
-    return res;
-} */
-
 vector<Airport> Graph::getDestInfo(int no, int flights) {
     vector<Airport> res;
     queue<int> q;

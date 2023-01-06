@@ -58,7 +58,6 @@ void Gestor::readAirports() {
         code_airp.insert({airCode, a});
         cities.insert(city);
         countries.insert(country);
-        //airports.insert({count, a});
         count++;
     }
 }
@@ -91,7 +90,6 @@ void Gestor::readAirlines() {
 }
 
 void Gestor::readFlights() {
-    //Graph graph(3019, true);
 
     vector<string> actLine(3);
     ifstream in("/home/ricardo/CLionProjects/untitled1/data/flights.csv");
@@ -115,51 +113,8 @@ void Gestor::readFlights() {
         ntarg = codes[targ];
         graph.addEdge(nsrc, ntarg, airline);
     }
-    //return graph;
 }
 
-/*double Gestor::Haversine(Position p1, Position p2) {
-    //distâncias
-    double dLat = (p2.getLat() - p1.getLat()) * M_PI / 180.0;
-    double dLon = (p2.getLon() - p1.getLon()) * M_PI / 180.0;
-
-    // converter lat e lon para radianos
-    double lat1 = p1.getLat() * M_PI / 180.0;
-    double lat2 = p2.getLat() * M_PI / 180.0;
-
-    // aplicar fórmula
-    double a = pow(sin(dLat / 2), 2) + pow(sin(dLon / 2), 2) * cos(lat1) * cos(lat2);
-    double rad = 6371;
-    double c = 2 * asin(sqrt(a));
-    return rad * c;
-} */
-
-/*vector<int> Gestor::findAirportsByPos(Position pos, double x) {
-    vector<int> values;
-    float curDist;
-    string curAirp;
-    for (int i = 1; i < 3020; i++) {
-        Airport a = airports[i];
-        Position p = a.getPosition();
-        curDist = Haversine(pos, p);
-        if (curDist < x) {
-            curAirp = a.getCode();
-            values.push_back(codes[curAirp]);
-        }
-    }
-    return values;
-} */
-
-/*vector<int> Gestor::findAirportsByCity(string code) {
-    vector<int> values;
-    for (int i = 1; i < 3020; i++) {
-        Airport a = airports[i];
-        if (a.getCityName() == code) {
-            values.push_back(codes[a.getCode()]);
-        }
-    }
-    return values;
-} */
 
 void Gestor::getAirportInfo(string aCode, int flights) {
     int n = codes[aCode];
@@ -208,24 +163,6 @@ void Gestor::getAirportByLocal(string aCode, int flights, bool city) {
     }
 }
 
-/*void Gestor::getShortPath(string src, string des, set<string> Airlines, bool filter) { NOW USELESS
-    int s = codes[src];
-    int d = codes[des];
-    stack<Airport> path = graph.getShortestPath(s, d, filter, Airlines);
-    Airport cur;
-    if (path.empty()) {cout << "Não existe trajeto que satisfaça as condições dadas.\n";}
-    else {
-        while (path.top().getCode() != des) {
-            cur = path.top();
-            //Airport curPort = airports[cur];
-            cout << cur.getCode() << " - ";
-            path.pop();
-        }
-        Airport last = code_airp[des];
-        cout << last.getCode() << "\n";
-    }
-}*/
-
 void Gestor::getFlightCount(string aCode) {
     int n = codes[aCode];
     Airport a = code_airp[aCode];
@@ -237,6 +174,7 @@ void Gestor::getShortestPath(vector<int> srcs, vector<int> dests, set<string> aL
     int min = INT_MAX;
     int bestSrc, bestDes;
     stack<Airport> path;
+    if (srcs.size() == 1 && dests.size() == 1 && srcs[0] == dests[0]) {cout << "Os dois aeroportos introduzidos não podem ser iguais."; return;}
     for (int s : srcs) {
         for (int d : dests) {
             path = graph.getShortestPath(s, d, limit, aLines);
