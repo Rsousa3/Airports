@@ -188,11 +188,11 @@ void Gestor::getShortestPath(vector<int> srcs, vector<int> dests, set<string> aL
     else {
         while (path.top().getCode() != cDes) {
             cur = path.top();
-            cout << cur.getCode() << " - ";
+            cout << cur.getName() << " (" << cur.getCode() << ")" << " - ";
             path.pop();
         }
         Airport last = code_airp[cDes];
-        cout << last.getCode() << "\n";
+        cout << last.getName() << " (" << last.getCode() << ")" << "\n";
     }
 }
 

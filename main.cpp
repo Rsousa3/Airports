@@ -49,12 +49,13 @@ int main() {
         else if (opc == 3) {
             cout << "Indique a posição:\n Latitude: ";
             cin >> pLat;
-            cout <<"\n Longitude: ";
+            cout <<"Longitude: ";
             cin >> pLon;
             position = Position(pLat, pLon);
             cout << "A que distância máxima os aeroportos devem estar distanciados (em quilômetros): ";
             cin >> dist; cout << "\n";
             partidas = graph.findAirportByPos(position, dist);
+            if (partidas.size() == 0) {cout << "Não existem aeroportos com as condições dadas."; return 0;}
         }
         else {cout << "Input inválido"; return 0;}
 //------------------------------CHEGADAS------------------------------------------------------
@@ -79,12 +80,13 @@ int main() {
         else if (opc == 3) {
             cout << "Indique a posição:\n Latitude: ";
             cin >> pLat;
-            cout <<"\n Longitude: ";
+            cout <<"Longitude: ";
             cin >> pLon;
             position = Position(pLat, pLon);
             cout << "A que distância máxima os aeroportos devem estar distanciados (em quilômetros): ";
             cin >> dist; cout << "\n";
             chegadas = graph.findAirportByPos(position, dist);
+            if (chegadas.size() == 0) {cout << "Não existem aeroportos com as condições dadas."; return 0;}
         }
         else {cout << "Input inválido"; return 0;}
 //----------------FILTRAR POR AIRLINE?------------------------------
