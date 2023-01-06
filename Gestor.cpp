@@ -130,7 +130,6 @@ void Gestor::getAirportInfo(string aCode, int flights) {
 void Gestor::getFlightAirlines(string aCode, int flights) {
     int n = codes[aCode];
     set<string> airlines = graph.getAirlines(n, flights);
-    //Airport src = airports[n];
     Airport src = code_airp[aCode];
     cout << "Existe(m) " << airlines.size() << " companhia(s) aérea(s) diferente(s) com voos em " << src.getName() << ":\n";
     for (string line : airlines) {
